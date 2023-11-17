@@ -1,0 +1,37 @@
+#Longitud: >=8
+#Comb.caract: una combinación de letras (mayúsculas y minúsculas), números y símbolos especiales (como !, @, #, $, %, etc.).
+#Evitar secuencias o patrones obvios: La contraseña no debe contener una secuencia simple o un patrón fácilmente reconocible como "123456" o "qwerty"
+puntos=0
+categoria=""
+contraseña=str(input("mete la contraseña:"))
+puntos+=len(contraseña)
+resultado="{} | {} | {}"
+for contador in range(0,len(contraseña),1):
+	if contraseña[contador].islower()==True:
+		puntos+=1
+		break
+for contador in range(0,len(contraseña),1):
+	if contraseña[contador].isupper()==True:
+		puntos+=1
+		break
+for contador in range(0,len(contraseña),1):
+	if contraseña[contador].isnumeric()==True:
+		puntos+=1
+		break
+for contador in range(0,len(contraseña),1):
+	if contraseña[contador].isnumeric()==False and contraseña[contador].isalpha()==False:
+		puntos+=1
+		for contador in range(contador,len(contraseña),1):
+			if contraseña[contador].isnumeric()==False and contraseña[contador].isalpha()==False:
+				puntos+=2
+		break
+match puntos:
+	case puntos<=15:
+		categoria="débil"
+	case puntos>15 and puntos<=20:
+		categoria="moderada"
+	case puntos>20 and puntos<=35:
+		categoria="buena"
+	case _:
+		categoria="impenetrable"
+print(resultado.format(contraseña,categoria,puntos))
