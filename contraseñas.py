@@ -1,53 +1,74 @@
-#Longitud: >=8
-#Comb.caract: una combinación de letras (mayúsculas y minúsculas), números y símbolos especiales (como !, @, #, $, %, etc.).
-#Evitar secuencias o patrones obvios: La contraseña no debe contener una secuencia simple o un patrón fácilmente reconocible como "123456" o "qwerty"
-#ubic_patrones=r"C:\Users\jojohnny\Documents\git\proyectp\Proyecto_contrase-as\Proyecto_contrase-as\Patrones obvios de contraseña - Proyecto (Fundamentos de Programación SEM202415).txt"
-ubic_patrones=str(input(r"ruta de ubic. patrones:"))
-#ubic_contraseña=r"C:\Users\jojohnny\Documents\git\proyectp\Proyecto_contrase-as\Proyecto_contrase-as\Contraseñas - Proyecto (Fundamentos de Programación SEM202415).txt"
-ubic_contraseña=str(input(r"ruta de ubic. contraseñas:"))
-patrones=open(ubic_patrones)
-contraseña=open(ubic_contraseña)
-list_patrones=[]
-list_contraseña=[]
-for ciclo in patrones:
-	list_patrones.append(ciclo.strip())
-for ciclo in contraseña:
-	list_contraseña.append(ciclo.strip())
-ciclo=0
+ubicpatr="patrones"
+ubiccontr="contraseñas"
+tamaño=0
 puntos=0
-categoria=""
-bucle=0
-for bucle in range(0,len(list_contraseña),1):
-	puntos+=len(list_contraseña[bucle])
-	resultado="{} | {} | {}"
-	for contador in range(0,len(list_contraseña[bucle]),1):
-		if list_contraseña[bucle].islower()==True:
-			puntos+=1
-			break
-	for contador in range(0,len(list_contraseña[bucle]),1):
-		if list_contraseña[bucle].isupper()==True:
-			puntos+=1
-			break
-	for contador in range(0,len(list_contraseña[bucle]),1):
-		if list_contraseña[bucle].isnumeric()==True:
-			puntos+=1
-			break
-	for contador in range(0,len(list_contraseña[bucle]),1):
-		if list_contraseña[bucle].isnumeric()==False and list_contraseña[bucle].isalpha()==False:
-			puntos+=1
-			for contador in range(contador,len(list_contraseña[bucle]),1):
-				if list_contraseña[bucle].isnumeric()==False and list_contraseña[bucle].isalpha()==False:
-					puntos+=2
-			break
-	for contador in range(0,len(list_patrones),1):
-		if list_patrones[contador] in list_contraseña[bucle]:
-			puntos-=5
-	if puntos<=15:
-		categoria="débil"
-	elif puntos>15 and puntos<=20:
-		categoria="moderada"
-	elif puntos>20 and puntos<=35:
-		categoria="buena"
-	else:
-		categoria="impenetrable"
-	print(resultado.format(list_contraseña[bucle],categoria,puntos))
+formato="{} | {} | {}"
+seguridad=""
+def obt_ubicacion_archivo(ubicacion):
+    print ("Introduzca la ruta del archivo de "+ubicacion+":")
+    ubicacion=str(input(r"ruta:"))
+    return (ubicacion)
+
+def tiene_minusc (palabra,valor):
+    for ciclo in range (0,len(palabra)):
+        if palabra[ciclo].islower()==True:
+            valor=+1
+            break
+    return(valor)
+
+def tiene_mayusc (palabra,valor):
+    for ciclo in range (0,len(palabra)):
+        if palabra[ciclo].isupper()==True:
+            valor=+1
+            break
+    return(valor)
+
+def tiene_mmro (palabra,valor):
+    for ciclo in range (0,len(palabra)):
+        if palabra[ciclo].isnumeric()==True:
+            valor+=1
+            break
+    return(valor)
+
+def tiene_esp_carac (palabra,valor):
+    for ciclo in range (0,len(palabra)):
+        if palabra[ciclo].isnumeric()==False and palabra[ciclo].isalpha()==False:
+            valor+=3
+            for ciclo in range(ciclo+1,len(palabra)):
+                if palabra[ciclo].isnumeric()==False and palabra[ciclo].isalpha()==False:
+                    valor+=2
+            break
+    return(valor)
+
+def tiene_patr(palabra,patrones,valor):
+    for ciclo in patrones:
+        patron=ciclo.strip()
+        if len(patron)<=len(palabra):
+            for i in range(0,len(palabra)-1):
+                if len(patron)+i<len(palabra):
+                    if patron == palabra[i:len(patron)+i]:
+                        valor+=5                        
+    return(valor)
+
+def determinar_seguridad (categ,valor):
+    if valor<=15:
+    	categ="débil"
+    elif valor>15 and valor<=20:
+    	categ="moderada"
+    elif valor>20 and valor<=35:
+    	categ="buena"
+    else:
+    	categ="impenetrable"   
+    return(categ)
+
+ubicpatr=obt_ubicacion_archivo(ubicpatr)
+ubiccontr=obt_ubicacion_archivo(ubiccontr)
+ubicpatr=open(ubicpatr)
+ubiccontr=open(ubiccontr)
+
+for mainloop in ubiccontr:
+    contr=mainloop.strip()
+    puntos=tiene_minusc(contr,puntos)+tiene_mayusc(contr,puntos)+tiene_mmro(contr,puntos)+tiene_esp_carac(contr,puntos)-tiene_patr(contr,ubicpatr,puntos)+len(contr)
+    seguridad=determinar_seguridad(seguridad,puntos)
+    print(formato.format(contr,seguridad,puntos))
+    puntos=0
