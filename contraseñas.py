@@ -15,11 +15,11 @@ def verif_archivo (archivo):
     existe = verificar(archivo)
     if existe != True:
         print("\nError!! no se encontro el archivo, asegurate de haberlo escrito correctamente.\n")
-    return (existe)#La razon de hacer esta funcion es porque nos parecio un buen toque comprobar si existe el archivo en cuestion, y nos tomamos la libertad de usar la libreria 'os' de python debido a que verificar si existe el archivo no es un requerimiento para el proyecto
+    return (existe)#La razón de hacer esta función es porque nos pareció un buen toque comprobar si existe el archivo en cuestión, nos tomamos la libertad de usar la librería 'os' de python debido a que verificar si existe el archivo, no es un requerimiento para el proyecto
 
 def obt_ubicacion_archivo (nombre_archivo,ubicacion,verificar):
     while True:
-        print ("\nIntroduzca la ruta absoluta del archivo "+nombre_archivo+" *Recuerda incluir la extension del mismo '.txt'")
+        print ("\nIntroduzca la ruta absoluta del archivo "+nombre_archivo+" *Recuerde que tiene que incluir la extension del mismo '.txt'")
         ubicacion=str(input(r"Ruta --:"))
         if verificar == True:
             if verif_archivo(ubicacion)==True:
@@ -116,10 +116,10 @@ for j in range (0,len(contrs_calificadas)-1):
             contrs_calificadas[k+1] = contrs_calificadas[k]
             contrs_calificadas[k] = posicion
 
-with open (obt_ubicacion_archivo("donde desea guardar las contrasenas ordenadas",ubic,False),"w") as contr_ordenadas:    
+with open (obt_ubicacion_archivo("¿Donde desea guardar las contraseñas ordenadas?",ubic,False),"w") as contr_ordenadas:    
     for ciclo in range(0,len(contrs_calificadas)):
         if ciclo != len(contrs_calificadas)-1:
             contr_ordenadas.write(contrs_calificadas[ciclo])
         else:
             contr_ordenadas.write(contrs_calificadas[ciclo].strip("\n"))
-print("Listo! el archivo con las contr ordenadas por nivel de seguridad ha sido exitosamente creado en la ubicacion especificada.")
+print("Listo! el archivo con las contreñas ordenadas por nivel de seguridad ha sido exitosamente creado en la ubicación especificada.")
