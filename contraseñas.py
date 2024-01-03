@@ -95,7 +95,7 @@ def tam_lista (archivo):
     lista=[""] * tam
     return (lista)
 
-ubiccontr = obt_ubicacion_archivo("de contra",ubiccontr,True)
+ubiccontr = obt_ubicacion_archivo("de contraseñas",ubiccontr,True)
 contrs_calificadas = tam_lista(ubiccontr)
 with open (ubiccontr,"r") as contr_desord:
    with open (obt_ubicacion_archivo ("de patrones",ubic,True),"r") as ubicpatr:
@@ -116,7 +116,7 @@ for j in range (0,len(contrs_calificadas)-1):
             contrs_calificadas[k+1] = contrs_calificadas[k]
             contrs_calificadas[k] = posicion
 
-with open (obt_ubicacion_archivo("¿Donde desea guardar las contraseñas ordenadas?",ubic,False),"w") as contr_ordenadas:    
+with open (obt_ubicacion_archivo("donde desea guardar las contraseñas ordenadas",ubic,False),"w") as contr_ordenadas:    
     for ciclo in range(0,len(contrs_calificadas)):
         if ciclo != len(contrs_calificadas)-1:
             contr_ordenadas.write(contrs_calificadas[ciclo])
