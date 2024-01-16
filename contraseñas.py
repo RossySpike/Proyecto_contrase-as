@@ -8,7 +8,7 @@ puntos = 0
 seguridad = str
 contr = str
 
-print("Bienvenido!")
+print("\n*********Bienvenido!*********\n")
 
 def verif_archivo (ubicacion): #Funcion que revisa si existe un archivo
 
@@ -28,7 +28,7 @@ def obt_ubicacion_archivo (ubicacion,validar):
 
         if validar == True: #Hay veces que no queremos verificar si existe el archivo, como por ejemplo cuando se quiere obtener la ubicacion donde se va a crear un archivo, ya que este no existe la condicion siguiente nunca se va a cumplir y seria un bucle infinito
             if verif_archivo(ubicacion)==True:
-                print("Archivo encontrado!\n")
+                print("\n*********Archivo encontrado!*********\n")
                 break
 
         else:
@@ -145,7 +145,7 @@ ubiccontr = obt_ubicacion_archivo(ubiccontr,True)
 contrs_calificadas = tam_lista(ubiccontr)
 
 print("Ingrese la ruta absoluta del archivo que contiene los patrones.")
-ubicpatr = obt_ubicacion_archivo ("de patrones",ubic,True)
+ubicpatr = obt_ubicacion_archivo (ubic,True)
 PATRONES = tam_lista(ubicpatr)
 
 with open (ubicpatr,"r") as ubicpatr:
@@ -188,4 +188,4 @@ with open (obt_ubicacion_archivo(ubic,False),"w") as contr_ordenadas:
         else:
             contr_ordenadas.write(contrs_calificadas[ciclo].strip("\n"))
 
-    print("Listo! el archivo con las contreñas ordenadas por nivel de seguridad ha sido exitosamente creado en la ubicación especificada.")
+    print("\n*********Listo!********\nEl archivo con las contreñas ordenadas por nivel de seguridad ha sido exitosamente creado en la ubicación especificada.")
