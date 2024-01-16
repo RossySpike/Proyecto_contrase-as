@@ -105,16 +105,19 @@ def tiene_patr(palabra,patrones,valor):
 def determinar_seguridad (categ,valor):
 
     if valor <= 15:
-    	categ = "débil"
+    	categ = "Débil"
 
     elif valor > 15 and valor <= 20:
-    	categ = "moderada"
+    	categ = "Moderada"
 
     elif valor > 20 and valor <= 35:
-    	categ = "buena"
+    	categ = "Buena"
+
+    elif valor > 35 and valor <= 100:
+        categ = "Excelente"
 
     else:
-    	categ = "impenetrable"   
+    	categ = "Impenetrable"   
 
     return (categ)
 
